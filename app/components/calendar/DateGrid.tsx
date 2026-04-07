@@ -1,7 +1,6 @@
 import React from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth } from 'date-fns';
 
-// 1. Define specific types for the props
 interface DateGridProps {
   onSelect: (date: Date) => void;
   getStatus: (date: Date) => 'start' | 'end' | 'in-range' | 'idle';

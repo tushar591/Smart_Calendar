@@ -10,8 +10,8 @@ import { useCalendarRange } from '../../hooks/useCalendarRange';
 
 const THEME = {
   name: "January",
-  primary: "#0284c7", // Sky 600
-  light: "#f0f9ff",   // Sky 50
+  primary: "#0284c7", 
+  light: "#f0f9ff", 
   image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"
 };
 
@@ -30,7 +30,6 @@ export default function WallCalendar() {
       <div className="relative w-full max-w-5xl bg-white shadow-[0_60px_100px_-20px_rgba(0,0,0,0.4)] rounded-b-3xl border border-gray-100">
         <Spiral />
 
-        {/* Improvement 1: 3D Flipping Animation */}
         <AnimatePresence mode="wait">
           <motion.div
             key={THEME.name}
@@ -44,7 +43,6 @@ export default function WallCalendar() {
               <div className="flex-1 order-2 md:order-1 border-r border-gray-50 pr-8">
                 <NotesField value={notes} onChange={(v: string) => { setNotes(v); localStorage.setItem('cal-notes', v); }} />
                 
-                {/* Improvement 4: Range Selection Insights */}
                 {selectedCount > 0 && (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
@@ -67,7 +65,6 @@ export default function WallCalendar() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Paper Layers */}
         <div className="absolute -bottom-3 left-4 right-4 h-10 bg-white border border-gray-200 shadow-sm rounded-b-3xl -z-10 opacity-80" />
         <div className="absolute -bottom-6 left-8 right-8 h-10 bg-white border border-gray-200 shadow-sm rounded-b-3xl -z-20 opacity-40" />
       </div>

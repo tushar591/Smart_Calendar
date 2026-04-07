@@ -9,9 +9,7 @@ import { useCalendarRange } from '../hooks/useCalendarRange';
 const CalendarRoot = () => {
   const { range, handleDateClick, getDayStatus } = useCalendarRange();
 
-  // 1. Use a "Lazy Initializer" function inside useState
   const [notes, setNotes] = React.useState(() => {
-    // Check if we are in the browser (Next.js SSR safety)
     if (typeof window !== 'undefined') {
       try {
         const saved = localStorage.getItem('calendar-notes');
@@ -24,7 +22,6 @@ const CalendarRoot = () => {
     return '';
   });
 
-  // 2. The handler remains the same
   const handleNoteChange = (val: string) => {
     setNotes(val);
     if (typeof window !== 'undefined') {
@@ -37,12 +34,10 @@ const CalendarRoot = () => {
       <HeroHeader month="January" year={2022} />
       
       <div className="flex flex-col md:flex-row p-6 md:p-12 gap-12 bg-[#fdfdfd]">
-        {/* Left Side: Notes Section (Logic flows from state) */}
         <section className="flex-1 order-2 md:order-1">
           <NotesField value={notes} onChange={handleNoteChange} />
         </section>
 
-        {/* Right Side: Interactive Date Grid */}
         <section className="flex-1 order-1 md:order-2">
           <DateGrid 
             onSelect={handleDateClick} 

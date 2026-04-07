@@ -1,6 +1,5 @@
 import React from 'react';
 
-// 2. Define types for the notes interaction
 interface NotesFieldProps {
   value: string;
   onChange: (value: string) => void;
