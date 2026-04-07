@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Calendar
 
-## Getting Started
+## Overview
+This project is a high-fidelity React component developed for the Frontend Engineering Challenge. The objective was to translate a static physical calendar design into a functional, responsive, and interactive web application. The implementation focuses on modular architecture, performance optimization, and a "physical-first" user interface.
 
-First, run the development server:
+## Key Features
+The component meets all baseline requirements and includes several advanced engineering enhancements to improve user experience and product depth:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Wall Calendar Aesthetic:** Features a custom spiral-bound wire effect (matte black), paper-stacking depth layers, and a geometric hero section with high-contrast typography.
+* **3D Page-Flip Animation:** Implements a realistic 3D transition when switching months, mimicking the physical action of flipping a wall calendar page.
+* **Dynamic Theme Engine:** The UI automatically adapts its color palette (primary and accent colors) based on the specific imagery and theme of the active month.
+* **Intelligent Range Selection:** A custom-built selection engine allows users to define a start and end date with clear visual indicators and real-time "Trip Duration" insights.
+* **Smart Event Markers:** Integrated support for holidays and personal events with hover-active tooltips for detailed information.
+* **Persistent Notes System:** A markdown-style notes section utilizing lazy state initialization and localStorage to ensure user data persists across browser sessions.
+* **Fully Responsive:** A mobile-first design that transitions from a vertical stack on mobile to a balanced 50/50 layout on desktop.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Stack
+* **Framework:** Next.js 15 (App Router)
+* **Language:** TypeScript (Strict Type Safety)
+* **Styling:** Tailwind CSS (Utility-first approach with custom CSS variables for theming)
+* **Animations:** Framer Motion (3D transformations and layout transitions)
+* **Date Logic:** date-fns (Immutable date manipulation)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture Decisions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Separation of Concerns (Logic Abstraction)
+To maintain a clean and testable codebase, all calendar logic—including range calculations, boundary handling, and selection states—is abstracted into a custom `useCalendarRange` hook. This ensures the UI components remain purely presentational.
 
-## Learn More
+### 2. Hydration and Performance
+The application utilizes "Lazy State Initialization" for data persistence. By wrapping the `localStorage` access in a state initializer, the project avoids unnecessary cascading renders and eliminates Next.js hydration mismatch errors during the server-to-client transition.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Client-Side Rendering Strategy
+Components relying on browser-only APIs (like `window` or `localStorage`) are loaded using Next.js Dynamic Imports with SSR disabled. This ensures a stable environment for physical UI elements and prevents flickering during initial load.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Semantic UI/UX
+All calendar dates are rendered as semantic `<button>` elements. This maintains accessibility standards, ensuring the component is keyboard-navigable and screen-reader friendly.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Installation and Setup
 
-## Deploy on Vercel
+### Prerequisites
+* Node.js 18.x or higher
+* npm or yarn
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Steps
+1.  **Clone the repository:**
+    ```bash
+    git clone [your-repository-link]
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+4.  **View the project:**
+    Navigate to `http://localhost:3000` in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Submission Details
+
+### Project Links
+* **Live Demo:** [[Click Here]](https://smart-calendar-seven.vercel.app/)
+* **Video Walkthrough:** [[Click Here]](https://drive.google.com/file/d/1GIVgOGiK_8IWL0XhCCp6d3gSAlseBxXR/view?usp=sharing)
+
+### Directory Overview
+* **/app/components/calendar:** Modular UI components (Hero, DateGrid, Spiral, etc.).
+* **/app/hooks:** Custom logic for range selection and duration calculation.
+* **/app/components/calendar/CalendarData.ts:** Centralized store for month themes, images, and events.
